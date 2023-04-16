@@ -51,8 +51,27 @@ public class CollectionsTest {
 
         Queue<Integer> queue = new PriorityQueue<>();
 
+        // 初始长度16，每次扩容*2，保证为2的n次幂
         HashMap<String, Object> hashMap = new HashMap<>();
 
+        /**
+         * 一般hash表散列位置选取即为对数字num取模。
+         * 在get方法中，使用了：
+         * hash & (table.length-1) 这个看似是按位与，实际在table.length为 2指数幂时，这个算法实际为对数字取模。
+         * 效率比%更高。
+         * 实际为去找hash散列表的下标。
+         *
+         * 但是这种方法不好解决冲突，因为不够散列。
+         * 所以使用hash() 方法增加散列度：
+         * h ^ (h >> 16) -> hashcode()得到一个32位的hash值，先右移16位使得高位为0，再与hashcode抑或后，高16位不变。
+         * 低16位在移位后将高16位填入。相当于用hashcode高16位抑或低16位。
+         * 变为了抑或后的值（相同为0不同为1），此时取最低4位的值，作为hash散列表的填充位。
+         *
+         * 为什么右移16位？
+         * 因为16位最大值位65536，散列表长度（length-1）很少能达到这么长。
+         * 所以在预处理hash值时，只处理后16位，然后在处理冲突时，与长度进行按位与（取模）即可。
+         *
+         */
 
 
     }
