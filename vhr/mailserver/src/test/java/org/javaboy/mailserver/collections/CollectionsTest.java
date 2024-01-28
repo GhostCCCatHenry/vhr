@@ -40,6 +40,8 @@ public class CollectionsTest {
          */
         arrayList.trimToSize();
 
+        Stack<String> stack = new Stack<>();
+
 
 
 
@@ -55,6 +57,8 @@ public class CollectionsTest {
         HashMap<String, Object> hashMap = new HashMap<>();
 
         /**
+         * 对HashMap hash值选取的解释：
+         *
          * 一般hash表散列位置选取即为对数字num取模。
          * 在get方法中，使用了：
          * hash & (table.length-1) 这个看似是按位与，实际在table.length为 2指数幂时，这个算法实际为对数字取模。
