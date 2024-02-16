@@ -13,7 +13,8 @@ public class CollectionsTest {
         ensureCapacity 手动指定扩容。
         ensureExplicitCapacity-> grow: 扩容到 1.5倍 与 指定大小 比较下更大的容量。
          */
-        ArrayList<String> arrayList = new ArrayList<>();
+        List<String> arrayList = new ArrayList<>();
+
 
         /*
         ensureCapacityInternal：
@@ -38,7 +39,7 @@ public class CollectionsTest {
         /*
         缩容，modCount++，注意，对ArrayList进行的写操作均会使得mod++，为了应对并发问题（并发情况modCount必然出现异变）。
          */
-        arrayList.trimToSize();
+//        arrayList.trimToSize();
 
         Stack<String> stack = new Stack<>();
 

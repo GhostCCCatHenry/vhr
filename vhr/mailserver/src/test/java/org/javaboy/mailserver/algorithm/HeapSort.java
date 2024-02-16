@@ -1,6 +1,9 @@
 package org.javaboy.mailserver.algorithm;
 
 import java.util.Arrays;
+import java.util.Hashtable;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class HeapSort {
 
@@ -13,7 +16,6 @@ public class HeapSort {
 
     // 最小堆
     private static void sortDesc(int[] nums) {
-
         // 二叉树 i 的左子节点为 2i+1；右子节点为2i+2；父节点为 向下取整[(i-1)/2]
         // 最后一个节点的父节点开始。第一次从底向上，可以保证底下子树的一定大余上边的。
         for (int i=((nums.length-1)-1)/2; i>=0; i--) {
@@ -56,7 +58,8 @@ public class HeapSort {
 
     // 最大堆
     private static void sortAsc(int[] nums) {
-
+        Map<String, String> ht = new Hashtable<>();
+        Map<String, String> map = new ConcurrentHashMap<>();
         // 二叉树 i 的左子节点为 2i+1；右子节点为2i+2；父节点为 向下取整[(i-1)/2]
         // 最后一个节点的父节点开始。第一次从底向上，可以保证底下子树的一定小余上边的。
         for (int i=((nums.length-1)-1)/2; i>=0; i--) {
