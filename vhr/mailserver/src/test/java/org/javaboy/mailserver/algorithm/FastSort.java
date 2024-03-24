@@ -27,10 +27,35 @@ public class FastSort {
         quickSort(nums, start, high);
         quickSort(nums, high+1, end);
     }
+
+    private static void quickSort(int[] nums, int start, int end, int k) {
+        if (start >= end) return;
+        int basicNum = nums[start];
+        int low = start - 1;
+        int high = end + 1;
+        while (low < high) {
+            // 此处low会把基准值也给交换走。
+            do high --; while (nums[high] < basicNum);
+            do low ++; while (nums[low] > basicNum);
+            if (low <= high) {
+                int temp  = nums[low];
+                nums[low] = nums[high];
+                nums[high] = temp;
+            }
+        }
+        // 此时high是最后一个小于基准值的, 不能用low，因为low很有可能是大于基准值的，会不准。
+        quickSort(nums, start, high, k);
+        quickSort(nums, high+1, end, k);
+    }
+
+
     public static void main(String[] args) {
         int[] arr = {10,8,7,13,22,39,19,12,4,51,5,6};
-        quickSort(arr, 0, arr.length-1);
-        System.out.println(Arrays.toString(arr));
+        quickSort(arr, 0, arr.length-1, 5);
+        for (int i = 0; i < 5; i++) {
+            System.out.println(arr[i]);
+        }
+
     }
 //    if (start < end) {
 //        int tmp = nums[start];

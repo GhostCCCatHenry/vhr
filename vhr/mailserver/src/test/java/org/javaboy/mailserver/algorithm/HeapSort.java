@@ -10,8 +10,8 @@ public class HeapSort {
     public static void main(String[] args) {
         int[] nums = {20,30,90,40,70,110,60,10,100,50,80,6,7,19};
 
-//        sortAsc(nums);
-        sortDesc(nums);
+        sortAsc(nums);
+//        sortDesc(nums);
     }
 
     // 最小堆
@@ -58,8 +58,6 @@ public class HeapSort {
 
     // 最大堆
     private static void sortAsc(int[] nums) {
-        Map<String, String> ht = new Hashtable<>();
-        Map<String, String> map = new ConcurrentHashMap<>();
         // 二叉树 i 的左子节点为 2i+1；右子节点为2i+2；父节点为 向下取整[(i-1)/2]
         // 最后一个节点的父节点开始。第一次从底向上，可以保证底下子树的一定小余上边的。
         for (int i=((nums.length-1)-1)/2; i>=0; i--) {

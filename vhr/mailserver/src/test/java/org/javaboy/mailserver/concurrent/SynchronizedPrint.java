@@ -7,38 +7,39 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class SynchronizedPrint {
 
+    private static synchronized void method() {}
+
     public static void main(String[] args) throws Exception {
 //        ReentrantLock lock = new ReentrantLock();
-        //
-        Object obj = new Object();
+        // 交替打印
         Thread jobA = new Thread(() -> {
-            synchronized (obj) {
+            synchronized (SynchronizedPrint.class) {
                 for (int i = 0; i <= 100; i++) {
                     if (i % 2 == 0) {
                         System.out.println("A Thread: " + i);
                         try {
-                            obj.wait();
+                            SynchronizedPrint.class.wait();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     } else {
-                        obj.notify();
+                        SynchronizedPrint.class.notify();
                     }
                 }
             }
         });
         Thread jobB = new Thread(() -> {
-            synchronized (obj) {
+            synchronized (SynchronizedPrint.class) {
                 for (int i = 0; i <= 100; i++) {
                     if (i % 2 == 1) {
                         System.out.println("B Thread: " + i);
                         try {
-                            obj.wait();
+                            SynchronizedPrint.class.wait();
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     } else {
-                        obj.notify();
+                        SynchronizedPrint.class.notify();
                     }
                 }
             }
@@ -47,7 +48,7 @@ public class SynchronizedPrint {
         jobB.start();
         jobA.join();
         jobB.join();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i <= 100; i++) {
             System.out.println("Main Thread: " + i);
         }
     }
