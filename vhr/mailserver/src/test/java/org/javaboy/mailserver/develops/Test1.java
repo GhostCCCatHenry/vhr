@@ -19,6 +19,7 @@ public class Test1 {
     private FutureTask<String> future = new FutureTask<>(() -> "");
     private LinkedBlockingQueue<QueryTask> queue = new LinkedBlockingQueue<>();
     private final int MAX_BATCH_NUMS = 100;
+    private Semaphore semaphore = new Semaphore(2000);
 
     public Test1() {
         Thread thread = new Thread(this::processBatch);
